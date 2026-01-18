@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:15-alpine # Version légère (Alpine) pour économiser ta RAM
+    container_name: yaerp_postgres
+    restart: no # unless-stopped
+    environment:
+      - POSTGRES_DB=yaerp_db
+      - POSTGRES_USER=yaerp
+      - POSTGRES_PASSWORD=y@3rP-2apaTa
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          memory: 512M # On limite la RAM pour protéger ta machine
+
+volumes:
+  postgres_data:
